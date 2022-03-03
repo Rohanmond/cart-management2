@@ -4,7 +4,6 @@ const Nav = () => {
   const { setRoute } = useNavRoute();
   const { cartData } = useCartData();
 
-  console.log("inside nav");
   return (
     <nav className="navbar">
       <ul className="nav-right">
@@ -15,6 +14,7 @@ const Nav = () => {
                 onClick={() => {
                   setRoute("product");
                 }}
+                style={{ cursor: "pointer" }}
                 className="material-icons-outlined"
               >
                 shop_2
@@ -24,7 +24,11 @@ const Nav = () => {
         </li>
         <li>
           <div className="badge-container">
-            <div className="badge-icon" onClick={() => setRoute("cart")}>
+            <div
+              className="badge-icon"
+              style={{ cursor: "pointer" }}
+              onClick={() => setRoute("cart")}
+            >
               <span className="material-icons">shopping_cart</span>
             </div>
             <div className="badge-number background-online">

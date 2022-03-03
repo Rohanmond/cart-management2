@@ -1,5 +1,10 @@
-const Cart = ({ el }) => {
-  const { image, name, price, quantity } = el;
+const Cart = ({
+  el,
+  removeCartHandler,
+  quantityIncreaseHandler,
+  quantityDecreaseHandler
+}) => {
+  const { image, name, price, quantity, id } = el;
   return (
     <div className="card-container card-container-hz brd-rd-semi-sq">
       <div className="card-img-container-hz">
@@ -21,20 +26,28 @@ const Cart = ({ el }) => {
           </div>
           <div className="cart_mngmt-card-item">
             <p>Quantity:</p>
-            <p className="text-secondary-color">
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => quantityDecreaseHandler(el)}
+              className="text-secondary-color"
+            >
               <i className="fas fa-minus-circle"></i>
             </p>
             <p className="cart-quantity-number">{quantity}</p>
-            <p className="text-secondary-color">
+            <p
+              style={{ cursor: "pointer" }}
+              onClick={() => quantityIncreaseHandler(el)}
+              className="text-secondary-color"
+            >
               <i className="fas fa-plus-circle"></i>
             </p>
           </div>
         </div>
         <div className="card-footer-elements cart_mngmt-card-footer">
-          <button className="btn btn-secondary outlined-primary brd-rd-semi-sq">
-            Add to wishlist
-          </button>
-          <button className="btn btn-secondary outlined-secondary hover-danger brd-rd-semi-sq">
+          <button
+            onClick={() => removeCartHandler(id)}
+            className="btn btn-secondary outlined-secondary hover-danger brd-rd-semi-sq"
+          >
             Remove from cart
           </button>
         </div>

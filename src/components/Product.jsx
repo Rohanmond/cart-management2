@@ -1,8 +1,5 @@
-import { useCartData } from "./CreateContext";
-
 const Product = ({ el, addToCartHandler }) => {
   const { name, image, price } = el;
-  const { cartData } = useCartData();
 
   return (
     <div className="card-container card-container-shadow productlist-card brd-rd-semi-sq">
