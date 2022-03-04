@@ -12,7 +12,7 @@ import "./styles.css";
 const productAPI = "https://62188b391a1ba20cbaa3c9ce.mockapi.io/api/products";
 const cartAPI = "https://62188b391a1ba20cbaa3c9ce.mockapi.io/api/carts";
 export default function App() {
-  const { route } = useNavRoute();
+  const { route, setRoute } = useNavRoute();
   const { setData } = useProductData();
   const { cartData, setCartData } = useCartData();
 
@@ -42,21 +42,10 @@ export default function App() {
     })();
   }, []);
 
-  const addToCartHandler = async (el) => {
+  const addToCartHandler = async (el, showAdd) => {
     try {
-      const cartEle = cartData.find((it) => it.product_id === el.id);
-      if (cartEle) {
-        const res = await axios.put(`${cartAPI}/${cartEle.id}`, {
-          ...cartEle,
-          quantity: cartEle.quantity + 1
-        });
-        if (res.status === 201 || res.status === 200)
-          setCartData(
-            cartData.map((it) => {
-              if (it.id === cartEle.id) return res.data;
-              return it;
-            })
-          );
+      if (!showAdd) {
+        setRoute("cart");
       } else {
         const res = await axios.post(cartAPI, {
           ...el,
@@ -65,10 +54,12 @@ export default function App() {
         });
         if (res.status === 201 || res.status === 200) {
           setCartData(cartData.concat(res.data));
+          return true;
         }
       }
     } catch (err) {
       console.error(err);
+      return false;
     }
   };
 
