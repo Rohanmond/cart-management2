@@ -19,22 +19,13 @@ export default function App() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(productAPI);
-        if (res.status === 200) {
-          setData(res.data);
+        const cartRes = await axios.get(cartAPI);
+        const productRes = await axios.get(productAPI);
+        if (cartRes.status === 200 || cartRes.status === 201) {
+          setCartData(cartRes.data);
         }
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(cartAPI);
-        if (res.status === 200 || res.status === 201) {
-          setCartData(res.data);
+        if (productRes.status === 200 || productRes === 201) {
+          setData(productRes.data);
         }
       } catch (err) {
         console.error(err);

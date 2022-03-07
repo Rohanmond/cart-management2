@@ -32,9 +32,7 @@ const Nav = () => {
               <span className="material-icons">shopping_cart</span>
             </div>
             <div className="badge-number background-online">
-              {cartData.reduce((acc, curr) => {
-                return acc + curr.quantity;
-              }, 0)}
+              {cartData.length}
             </div>
           </div>
         </li>

@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useCartData } from "./CreateContext";
 
 const Product = ({ el, addToCartHandler }) => {
   const { name, image, price } = el;
   const [showAdd, setShowAdd] = useState(true);
   const { cartData } = useCartData();
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     cartData.find((it) => it.product_id === el.id)
       ? setShowAdd(false)
       : setShowAdd(true);
